@@ -1,3 +1,11 @@
+### Source
+
+The forward models are codes writen by Dr Toshio Fukushima
+
+[https://www.researchgate.net/profile/Toshio-Fukushima](https://www.researchgate.net/profile/Toshio-Fukushima)
+
+### Running Fortran Subroutines in C
+
 Linking with Intel oneAPI Compiler Toolchain
 ```console
 ifx /c xfpri.f90
@@ -14,7 +22,7 @@ In declarations, do not forget that Fortran is a pass by reference langauge!
 
 It took me a long time to figure out how to link `main.c` to `fxpri.obj`.
 This is because I did not know how to look at the symbol table on Windows.
-To example the symbols in `xfpri.obj` (or any `.obj` file for that matter), use the `dumpbin` utility:
+To examine the symbols in `xfpri.obj` (or any `.obj` file for that matter), use the `dumpbin` utility:
 ```console
 dumpbin /SYMBOLS xfpri.obj
 ```
