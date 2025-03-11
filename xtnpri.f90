@@ -1,134 +1,134 @@
-program xtnpri
-!
-! Test program package of "tnvpri", "tngpri". & "tnggpri"
-!
-! Computation of graviational potential of a uniform rectangular prism
-! by even order 0, 2, to 16 truncated Taylor expansion
-!
-! Reference: Fukushima, T, (2019) Geophys. J. Int'l, revised
-!   Taylor expansion of prismatic gravitational field
-!
-! Author: Fukushima, T. <Toshio.Fukushima@nao.ac.jp>
-!
-! Used programs: fabset, fcprep, tnvpri, tngpri, tnggpri
-!
-implicit integer (i-n)
-implicit real*8 (a-h,o-z)
-!
-common /cset0/gm
-common /cset2/c200,c020,c002
-common /cset4/c400,c040,c004,c022,c202,c220
-common /cset6/c600,c060,c006,c420,c042,c204,c402,c024,c240,c222
-common /cset8/c800,c080,c008,c620,c062,c206,c602,c026,c260, &
-              c044,c404,c440,c422,c242,c224
-common /csetA/cA00,c0A0,c00A,c820,c082,c208,c802,c028,c280, &
-              c640,c064,c406,c604,c046,c460,c622,c262,c226, &
-              c244,c424,c442
-common /csetC/cC00,c0C0,c00C,cA20,c0A2,c20A,cA02,c02A,c2A0, &
-              c840,c084,c408,c804,c048,c480,c822,c282,c228, &
-              c066,c606,c660,c642,c264,c426,c624,c246,c462,c444
-common /csetE/cE00,c0E0,c00E,cC20,c0C2,c20C,cC02,c02C,c2C0, &
-              cA40,c0A4,c40A,cA04,c04A,c4A0,cA22,c2A2,c22A, &
-              c860,c086,c608,c806,c068,c680,c842,c284,c428, &
-              c824,c248,c482,c266,c626,c662,c644,c464,c446
-common /csetG/cG00,c0G0,c00G,cE20,c0E2,c20E,cE02,c02E,c2E0, &
-              cC40,c0C4,c40C,cc04,c04C,c4c0,cC22,c2C2,c22C, &
-              cA60,c0A6,c60A,cA06,c06A,c6A0,cA42,c2A4,c42A, &
-              cA24,c24A,c4A2,c088,c808,c880,c862,c286,c628, &
-              c826,c268,c682,c844,c484,c448,c466,c646,c664
-!
-dx=5.0d0
-dy=6.2d0
-dz=10.d0
-!
-a=dx*0.5d0;b=dy*0.5d0;c=dz*0.5d0
-!
-write (*,"(a20,1p3e25.15)") "a,b,c=",a,b,c
-!
-n=16
-call fabset(n,a,b)
-call fcprep(n,c)
-!
-write (*,"(a20,1pe25.15)") "GM=",gm
-write (*,"(a20,1p3e25.15)") "c200,c020,c002=",c200,c020,c002
-write (*,"(a20,1p3e25.15)") "c400,c040,c004=",c400,c040,c004
-write (*,"(a20,1p3e25.15)") "c022,c202,c220=",c022,c202,c220
-write (*,"(a20,1p3e25.15)") "c600,c060,c006=",c600,c060,c006
-write (*,"(a20,1p3e25.15)") "c420,c042,c204=",c420,c042,c204
-write (*,"(a20,1p3e25.15)") "c240,c024,c402=",c240,c024,c402
-write (*,"(a20,1pe25.15)") "c222=",c222
-write (*,"(a20,1p3e25.15)") "c800,c080,c008=",c800,c080,c008
-write (*,"(a20,1p3e25.15)") "c620,c062,c206=",c620,c062,c206
-write (*,"(a20,1p3e25.15)") "c260,c026,c602=",c260,c026,c602
-write (*,"(a20,1p3e25.15)") "c044,c404,c440=",c044,c404,c440
-write (*,"(a20,1p3e25.15)") "c422,c242,c224=",c422,c242,c224
-write (*,"(a20,1p3e25.15)") "cA00,c0A0,c00A=",cA00,c0A0,c00A
-write (*,"(a20,1p3e25.15)") "c820,c082,c208=",c820,c082,c208
-write (*,"(a20,1p3e25.15)") "c280,c028,c802=",c280,c028,c802
-write (*,"(a20,1p3e25.15)") "c640,c064,c406=",c640,c064,c406
-write (*,"(a20,1p3e25.15)") "c460,c046,c604=",c460,c046,c604
-write (*,"(a20,1p3e25.15)") "c622,c262,c226=",c622,c262,c226
-write (*,"(a20,1p3e25.15)") "c244,c424,c442=",c244,c424,c442
-write (*,"(a20,1p3e25.15)") "cC00,c0C0,c00C=",cC00,c0C0,c00C
-write (*,"(a20,1p3e25.15)") "cA20,c0A2,c20A=",cA20,c0A2,c20A
-write (*,"(a20,1p3e25.15)") "c2A0,c02A,cA02=",c2A0,c02A,cA02
-write (*,"(a20,1p3e25.15)") "c840,c084,c408=",c840,c084,c408
-write (*,"(a20,1p3e25.15)") "c480,c048,c804=",c480,c048,c804
-write (*,"(a20,1p3e25.15)") "c822,c282,c228=",c822,c282,c228
-write (*,"(a20,1p3e25.15)") "c066,c606,c660=",c066,c606,c660
-write (*,"(a20,1p3e25.15)") "c642,c264,c426=",c642,c264,c426
-write (*,"(a20,1p3e25.15)") "c462,c246,c624=",c462,c246,c624
-write (*,"(a20,1pe25.15)") "c444=",c444
-write (*,"(a20,1p3e25.15)") "cE00,c0E0,c00E=",cE00,c0E0,c00E
-write (*,"(a20,1p3e25.15)") "cC20,c0C2,c20C=",cC20,c0C2,c20C
-write (*,"(a20,1p3e25.15)") "c2C0,c02C,cC02=",c2C0,c02C,cC02
-write (*,"(a20,1p3e25.15)") "cA40,c0A4,c40A=",cA40,c0A4,c40A
-write (*,"(a20,1p3e25.15)") "c4A0,c04A,cA04=",c4A0,c04A,cA04
-write (*,"(a20,1p3e25.15)") "cA22,c2A2,c22A=",cA22,c2A2,c22A
-write (*,"(a20,1p3e25.15)") "c860,c086,c608=",c860,c086,c608
-write (*,"(a20,1p3e25.15)") "c680,c068,c806=",c680,c068,c806
-write (*,"(a20,1p3e25.15)") "c842,c284,c428=",c842,c284,c428
-write (*,"(a20,1p3e25.15)") "c482,c248,c824=",c482,c248,c824
-write (*,"(a20,1p3e25.15)") "c266,c626,c662=",c266,c626,c662
-write (*,"(a20,1p3e25.15)") "c644,c464,c446=",c644,c464,c446
-write (*,"(a20,1p3e25.15)") "cG00,c0G0,c00G=",cG00,c0G0,c00G
-write (*,"(a20,1p3e25.15)") "cE20,c0E2,c20E=",cE20,c0E2,c20E
-write (*,"(a20,1p3e25.15)") "c2E0,c02E,cE02=",c2E0,c02E,cE02
-write (*,"(a20,1p3e25.15)") "cC40,c0C4,c40C=",cC40,c0C4,c40C
-write (*,"(a20,1p3e25.15)") "c4C0,c04C,cC04=",c4C0,c04C,cC04
-write (*,"(a20,1p3e25.15)") "cC22,c2C2,c22C=",cC22,c2C2,c22C
-write (*,"(a20,1p3e25.15)") "cA60,c0A6,c60A=",cA60,c0A6,c60A
-write (*,"(a20,1p3e25.15)") "c6A0,c06A,cA06=",c6A0,c06A,cA06
-write (*,"(a20,1p3e25.15)") "cA42,c2A4,c42A=",cA42,c2A4,c42A
-write (*,"(a20,1p3e25.15)") "c4A2,c24A,cA24=",c4A2,c24A,cA24
-write (*,"(a20,1p3e25.15)") "c088,c808,c880=",c088,c808,c880
-write (*,"(a20,1p3e25.15)") "c862,c286,c628=",c862,c286,c628
-write (*,"(a20,1p3e25.15)") "c682,c268,c826=",c682,c268,c826
-write (*,"(a20,1p3e25.15)") "c844,c484,c448=",c844,c484,c448
-write (*,"(a20,1p3e25.15)") "c466,c646,c664=",c466,c646,c664
-!
-x=30.d0
-y=40.d0
-z=50.d0
-!
-write (*,"(a20,1p3e25.15)") "X,Y,Z=",x,y,z
-!
-do n=0,8
-    v=tnvpri(n,x,y,z)
-    write (*,"(a15,i5,1pe25.15)") "order,V=",2*n,v
-enddo
-do n=0,8
-    call tngpri(n,x,y,z,v,gx,gy,gz)
-    write (*,"(a15,i5,1p3e25.15)") "order,g=",2*n,gx,gy,gz
-enddo
-do n=0,8
-    call tnggpri(n,x,y,z,v,gx,gy,gz,gxx,gxy,gxz,gyy,gyz,gzz)
-    write (*,"(a15,i5,1p6e25.15)") "order,Gamma=",2*n,gxx,gxy,gxz,gyy,gyz,gzz
-enddo
-!
-stop
-end program xtnpri
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!program xtnpri
+!!
+!! Test program package of "tnvpri", "tngpri". & "tnggpri"
+!!
+!! Computation of graviational potential of a uniform rectangular prism
+!! by even order 0, 2, to 16 truncated Taylor expansion
+!!
+!! Reference: Fukushima, T, (2019) Geophys. J. Int'l, revised
+!!   Taylor expansion of prismatic gravitational field
+!!
+!! Author: Fukushima, T. <Toshio.Fukushima@nao.ac.jp>
+!!
+!! Used programs: fabset, fcprep, tnvpri, tngpri, tnggpri
+!!
+!implicit integer (i-n)
+!implicit real*8 (a-h,o-z)
+!!
+!common /cset0/gm
+!common /cset2/c200,c020,c002
+!common /cset4/c400,c040,c004,c022,c202,c220
+!common /cset6/c600,c060,c006,c420,c042,c204,c402,c024,c240,c222
+!common /cset8/c800,c080,c008,c620,c062,c206,c602,c026,c260, &
+!              c044,c404,c440,c422,c242,c224
+!common /csetA/cA00,c0A0,c00A,c820,c082,c208,c802,c028,c280, &
+!              c640,c064,c406,c604,c046,c460,c622,c262,c226, &
+!              c244,c424,c442
+!common /csetC/cC00,c0C0,c00C,cA20,c0A2,c20A,cA02,c02A,c2A0, &
+!              c840,c084,c408,c804,c048,c480,c822,c282,c228, &
+!              c066,c606,c660,c642,c264,c426,c624,c246,c462,c444
+!common /csetE/cE00,c0E0,c00E,cC20,c0C2,c20C,cC02,c02C,c2C0, &
+!              cA40,c0A4,c40A,cA04,c04A,c4A0,cA22,c2A2,c22A, &
+!              c860,c086,c608,c806,c068,c680,c842,c284,c428, &
+!              c824,c248,c482,c266,c626,c662,c644,c464,c446
+!common /csetG/cG00,c0G0,c00G,cE20,c0E2,c20E,cE02,c02E,c2E0, &
+!              cC40,c0C4,c40C,cc04,c04C,c4c0,cC22,c2C2,c22C, &
+!              cA60,c0A6,c60A,cA06,c06A,c6A0,cA42,c2A4,c42A, &
+!              cA24,c24A,c4A2,c088,c808,c880,c862,c286,c628, &
+!              c826,c268,c682,c844,c484,c448,c466,c646,c664
+!!
+!dx=5.0d0
+!dy=6.2d0
+!dz=10.d0
+!!
+!a=dx*0.5d0;b=dy*0.5d0;c=dz*0.5d0
+!!
+!write (*,"(a20,1p3e25.15)") "a,b,c=",a,b,c
+!!
+!n=16
+!call fabset(n,a,b)
+!call fcprep(n,c)
+!!
+!write (*,"(a20,1pe25.15)") "GM=",gm
+!write (*,"(a20,1p3e25.15)") "c200,c020,c002=",c200,c020,c002
+!write (*,"(a20,1p3e25.15)") "c400,c040,c004=",c400,c040,c004
+!write (*,"(a20,1p3e25.15)") "c022,c202,c220=",c022,c202,c220
+!write (*,"(a20,1p3e25.15)") "c600,c060,c006=",c600,c060,c006
+!write (*,"(a20,1p3e25.15)") "c420,c042,c204=",c420,c042,c204
+!write (*,"(a20,1p3e25.15)") "c240,c024,c402=",c240,c024,c402
+!write (*,"(a20,1pe25.15)") "c222=",c222
+!write (*,"(a20,1p3e25.15)") "c800,c080,c008=",c800,c080,c008
+!write (*,"(a20,1p3e25.15)") "c620,c062,c206=",c620,c062,c206
+!write (*,"(a20,1p3e25.15)") "c260,c026,c602=",c260,c026,c602
+!write (*,"(a20,1p3e25.15)") "c044,c404,c440=",c044,c404,c440
+!write (*,"(a20,1p3e25.15)") "c422,c242,c224=",c422,c242,c224
+!write (*,"(a20,1p3e25.15)") "cA00,c0A0,c00A=",cA00,c0A0,c00A
+!write (*,"(a20,1p3e25.15)") "c820,c082,c208=",c820,c082,c208
+!write (*,"(a20,1p3e25.15)") "c280,c028,c802=",c280,c028,c802
+!write (*,"(a20,1p3e25.15)") "c640,c064,c406=",c640,c064,c406
+!write (*,"(a20,1p3e25.15)") "c460,c046,c604=",c460,c046,c604
+!write (*,"(a20,1p3e25.15)") "c622,c262,c226=",c622,c262,c226
+!write (*,"(a20,1p3e25.15)") "c244,c424,c442=",c244,c424,c442
+!write (*,"(a20,1p3e25.15)") "cC00,c0C0,c00C=",cC00,c0C0,c00C
+!write (*,"(a20,1p3e25.15)") "cA20,c0A2,c20A=",cA20,c0A2,c20A
+!write (*,"(a20,1p3e25.15)") "c2A0,c02A,cA02=",c2A0,c02A,cA02
+!write (*,"(a20,1p3e25.15)") "c840,c084,c408=",c840,c084,c408
+!write (*,"(a20,1p3e25.15)") "c480,c048,c804=",c480,c048,c804
+!write (*,"(a20,1p3e25.15)") "c822,c282,c228=",c822,c282,c228
+!write (*,"(a20,1p3e25.15)") "c066,c606,c660=",c066,c606,c660
+!write (*,"(a20,1p3e25.15)") "c642,c264,c426=",c642,c264,c426
+!write (*,"(a20,1p3e25.15)") "c462,c246,c624=",c462,c246,c624
+!write (*,"(a20,1pe25.15)") "c444=",c444
+!write (*,"(a20,1p3e25.15)") "cE00,c0E0,c00E=",cE00,c0E0,c00E
+!write (*,"(a20,1p3e25.15)") "cC20,c0C2,c20C=",cC20,c0C2,c20C
+!write (*,"(a20,1p3e25.15)") "c2C0,c02C,cC02=",c2C0,c02C,cC02
+!write (*,"(a20,1p3e25.15)") "cA40,c0A4,c40A=",cA40,c0A4,c40A
+!write (*,"(a20,1p3e25.15)") "c4A0,c04A,cA04=",c4A0,c04A,cA04
+!write (*,"(a20,1p3e25.15)") "cA22,c2A2,c22A=",cA22,c2A2,c22A
+!write (*,"(a20,1p3e25.15)") "c860,c086,c608=",c860,c086,c608
+!write (*,"(a20,1p3e25.15)") "c680,c068,c806=",c680,c068,c806
+!write (*,"(a20,1p3e25.15)") "c842,c284,c428=",c842,c284,c428
+!write (*,"(a20,1p3e25.15)") "c482,c248,c824=",c482,c248,c824
+!write (*,"(a20,1p3e25.15)") "c266,c626,c662=",c266,c626,c662
+!write (*,"(a20,1p3e25.15)") "c644,c464,c446=",c644,c464,c446
+!write (*,"(a20,1p3e25.15)") "cG00,c0G0,c00G=",cG00,c0G0,c00G
+!write (*,"(a20,1p3e25.15)") "cE20,c0E2,c20E=",cE20,c0E2,c20E
+!write (*,"(a20,1p3e25.15)") "c2E0,c02E,cE02=",c2E0,c02E,cE02
+!write (*,"(a20,1p3e25.15)") "cC40,c0C4,c40C=",cC40,c0C4,c40C
+!write (*,"(a20,1p3e25.15)") "c4C0,c04C,cC04=",c4C0,c04C,cC04
+!write (*,"(a20,1p3e25.15)") "cC22,c2C2,c22C=",cC22,c2C2,c22C
+!write (*,"(a20,1p3e25.15)") "cA60,c0A6,c60A=",cA60,c0A6,c60A
+!write (*,"(a20,1p3e25.15)") "c6A0,c06A,cA06=",c6A0,c06A,cA06
+!write (*,"(a20,1p3e25.15)") "cA42,c2A4,c42A=",cA42,c2A4,c42A
+!write (*,"(a20,1p3e25.15)") "c4A2,c24A,cA24=",c4A2,c24A,cA24
+!write (*,"(a20,1p3e25.15)") "c088,c808,c880=",c088,c808,c880
+!write (*,"(a20,1p3e25.15)") "c862,c286,c628=",c862,c286,c628
+!write (*,"(a20,1p3e25.15)") "c682,c268,c826=",c682,c268,c826
+!write (*,"(a20,1p3e25.15)") "c844,c484,c448=",c844,c484,c448
+!write (*,"(a20,1p3e25.15)") "c466,c646,c664=",c466,c646,c664
+!!
+!x=30.d0
+!y=40.d0
+!z=50.d0
+!!
+!write (*,"(a20,1p3e25.15)") "X,Y,Z=",x,y,z
+!!
+!do n=0,8
+!    v=tnvpri(n,x,y,z)
+!    write (*,"(a15,i5,1pe25.15)") "order,V=",2*n,v
+!enddo
+!do n=0,8
+!    call tngpri(n,x,y,z,v,gx,gy,gz)
+!    write (*,"(a15,i5,1p3e25.15)") "order,g=",2*n,gx,gy,gz
+!enddo
+!do n=0,8
+!    call tnggpri(n,x,y,z,v,gx,gy,gz,gxx,gxy,gxz,gyy,gyz,gzz)
+!    write (*,"(a15,i5,1p6e25.15)") "order,Gamma=",2*n,gxx,gxy,gxz,gyy,gyz,gzz
+!enddo
+!!
+!stop
+!end program xtnpri
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 subroutine fabset(n,a,b)
 !
 ! Preparation of polynomial coefficients, C_{ijkn}, from a and b
