@@ -1,10 +1,30 @@
+/*
+ * This is an example of how to use Fortran subroutines
+ * in C code, on Intel and GNU compiler toolchains.
+ */
 #include <math.h>
 #include <stdio.h>
 
+/*
+ * My Intel Compiler prefers to call the `fvpri` routine
+ * `FVPRI`, while gcc prefers to call the `fvpri` routine
+ * as `fvpri_`. These idiosyncrasies in compilers are
+ * addressed via the header guard and redefinition.
+ */
 #ifndef _WIN32
 #define FVPRI fvpri_
 #endif
 
+/*
+ * Fortran is a pass by reference language.
+ * C is a pass by value language.
+ * Fortran subroutines called from C ought to be
+ * declared as pass by reference - which explains
+ * the pointers everywhere.
+ *
+ * The value returned by the subroutine FVPRI
+ * is passed by value.
+ */
 extern double FVPRI(double*,double*,double*,double*,double*,double*);
 
 int main() {
