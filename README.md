@@ -4,7 +4,7 @@ The forward models are codes writen by Dr Toshio Fukushima
 
 [https://www.researchgate.net/profile/Toshio-Fukushima](https://www.researchgate.net/profile/Toshio-Fukushima)
 
-### Running Fortran Subroutines in C
+### Running Fortran Subroutines in C - Intel Compilers
 
 Linking with Intel oneAPI Compiler Toolchain
 ```console
@@ -28,3 +28,24 @@ dumpbin /SYMBOLS xfpri.obj
 ```
 The declaration in C must match the name in the dump *exactly*.
 It is case sensitive.
+
+### Running Fortran Subroutines in C - GNU Compilers
+
+This process went more smoothly.
+```console
+gfortran -c xfpri.f90
+gcc -c main.c
+gcc -o app main.o xfpri.o
+```
+
+I did have to remove the program from the Fortran code, and change the declaration of the function in C
+```c
+extern double fvpri_(double*,double*,double*,double*,double*,double*);
+```
+Not a big issue.
+I made sure to keep the Intel versions in this repository, because they were slightly more difficult to figure out.
+
+The equivalent of `dumpbin` on unix platforms is the `nm` utility.
+```console
+nm xfpri.o
+```
